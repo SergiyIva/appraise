@@ -1,0 +1,36 @@
+# IntelliJ project files
+.idea
+*.iml
+
+# dependencies
+*/node_modules
+.bun
+
+# testing
+/coverage
+
+docs
+data
+
+*/.env
+
+# production
+*/.next
+*/build
+*/.build
+*/dist
+*/.adminjs
+*/adminlib
+*/out/
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+logs
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+

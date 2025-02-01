@@ -1,0 +1,70 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - dokploy-network
+
+  client:
+    depends_on:
+      - server
+      - postgres
+    hostname: localhost
+    restart: always
+    build:
+      context: .
+      dockerfile: ./client/client.Dockerfile
+      args:
+        DOMAIN_API: ${DOMAIN_API}
+    ports:
+      - "3000"
+    environment:
+      PORT: 3000
+    env_file:
+      - .env
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.client.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.client.entrypoints=websecure"
+      - "traefik.http.routers.client.tls.certResolver=letsencrypt"
+
+  server:
+    depends_on:
+      - postgres
+    build:
+      context: .
+      dockerfile: ./server/server.Dockerfile
+      args:
+        DATABASE_URL: ${DATABASE_URL}
+    restart: always
+    env_file:
+      .env
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+    ports:
+      - "5000"
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.server.rule=Host(`${DOMAIN_API}`) || (Host(`${DOMAIN}`) && PathPrefix(`/graphql`))"
+      - "traefik.http.routers.server.entrypoints=websecure"
+      - "traefik.http.routers.server.tls.certResolver=letsencrypt"
+
+volumes:
+  postgres:
+
+networks:
+  dokploy-network:
+    external: true
