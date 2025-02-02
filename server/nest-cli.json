@@ -9,7 +9,10 @@
       "options": {
         "swcrcPath": ".swcrc",
         "copyFiles": true
-      }
+      },
+      "plugins": [
+        "@nestjs/graphql"
+      ]
     },
     "tsConfigPath": "tsconfig.json"
   }

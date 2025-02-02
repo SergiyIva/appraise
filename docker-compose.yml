@@ -44,8 +44,6 @@ services:
     build:
       context: .
       dockerfile: ./server/server.Dockerfile
-      args:
-        DATABASE_URL: ${DATABASE_URL}
     restart: always
     env_file:
       .env

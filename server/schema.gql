@@ -1,0 +1,22 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Mutation {
+  changeManager(managerId: Float!, userId: Float!): [User!]!
+  createUser(firstName: String!, lastName: String!, managerId: Float!): User!
+  removeUser(id: Float!): [User!]!
+}
+
+type Query {
+  getUserTree: [User!]
+}
+
+type User {
+  firstName: String!
+  id: Float!
+  lastName: String!
+  level: Float!
+  managerId: Float
+  path: [Float!]!
+}
