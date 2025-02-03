@@ -20,7 +20,7 @@ RUN if [[ $(uname -m) == "aarch64" ]] ; \
 RUN npm install -g bun
 
 WORKDIR /app/client
-COPY /client/package.json /client/next.config.ts /client/bun.lockb ./
+COPY /client/package.json /client/next.config.ts /client/bun.lockb /client/panda.config.ts ./
 RUN bun install --frozen-lockfile
 
 FROM base AS builder
