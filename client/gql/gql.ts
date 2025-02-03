@@ -17,7 +17,7 @@ const documents = {
     "\n  mutation ChangeManager($managerId: Int!, $userId: Int!) {\n    changeManager(managerId: $managerId, userId: $userId) {\n      ...TUser\n    }\n  }\n": types.ChangeManagerDocument,
     "\n  mutation RemoveUser($id: Int!) {\n    removeUser(id: $id) {\n      ...TUser\n    }\n  }\n": types.RemoveUserDocument,
     "\n  fragment TUser on User {\n    id\n    firstName\n    lastName\n    level\n    managerId\n    path\n  }\n": types.TUserFragmentDoc,
-    "\n  query GetUserTree {\n    getUserTree {\n      ...TUser\n      #      x @client\n      #      y @client\n    }\n  }\n": types.GetUserTreeDocument,
+    "\n  query GetUserTree {\n    getUserTree {\n      ...TUser\n    }\n  }\n": types.GetUserTreeDocument,
 };
 
 /**
@@ -53,7 +53,7 @@ export function graphql(source: "\n  fragment TUser on User {\n    id\n    first
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GetUserTree {\n    getUserTree {\n      ...TUser\n      #      x @client\n      #      y @client\n    }\n  }\n"): (typeof documents)["\n  query GetUserTree {\n    getUserTree {\n      ...TUser\n      #      x @client\n      #      y @client\n    }\n  }\n"];
+export function graphql(source: "\n  query GetUserTree {\n    getUserTree {\n      ...TUser\n    }\n  }\n"): (typeof documents)["\n  query GetUserTree {\n    getUserTree {\n      ...TUser\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

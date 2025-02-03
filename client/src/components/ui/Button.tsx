@@ -28,9 +28,9 @@ const button = cva({
       },
     },
     size: {
-      sm: { padding: "4 12", fontSize: "0.85rem" },
-      md: { padding: "8 24", fontSize: "1rem" },
-      lg: { padding: "12 36", fontSize: "1.25rem" },
+      sm: { padding: "4px 12px", fontSize: "0.85rem" },
+      md: { padding: "8px 24px", fontSize: "1rem" },
+      lg: { padding: "12px 36px", fontSize: "1.25rem" },
     },
     disabled: {
       true: {

@@ -27,6 +27,7 @@ const Wrapper = styled(
       borderTopColor: "secondary",
       padding: "0.5em 1em",
       width: "10rem",
+      maxWidth: "10rem",
     },
   },
   {
@@ -75,30 +76,38 @@ export const Card = ({ user }: CardProps) => {
   };
 
   return (
-    <ContextMenu userId={user.id}>
-      <Wrapper
-        id={`user-${user.id}`}
-        onClick={handleClick}
-        className={css(
-          changeManagerVar && !user.path.includes(changeManagerVar)
-            ? {
-                boxShadow: "0px 0 15px 4px hsla(120,70%,60%,0.35)",
-                cursor: "pointer",
-                _hover: {
-                  boxShadow: "0px 0 15px 4px hsla(300,70%,60%,0.35)",
-                },
-              }
-            : {},
-        )}
-      >
-        <IconDivider>
-          <Image src={"/user.svg"} width={40} height={40} alt={"User"} />
-        </IconDivider>
-        <Content>
-          <div>{user.firstName}</div>
-          <div>{user.lastName}</div>
-        </Content>
-      </Wrapper>
-    </ContextMenu>
+    <div
+      className={css({
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      })}
+    >
+      <ContextMenu userId={user.id}>
+        <Wrapper
+          id={`user-${user.id}`}
+          onClick={handleClick}
+          className={css(
+            changeManagerVar && !user.path.includes(changeManagerVar)
+              ? {
+                  boxShadow: "0px 0 15px 4px hsla(120,70%,60%,0.35)",
+                  cursor: "pointer",
+                  _hover: {
+                    boxShadow: "0px 0 15px 4px hsla(300,70%,60%,0.35)",
+                  },
+                }
+              : {},
+          )}
+        >
+          <IconDivider>
+            <Image src={"/user.svg"} width={40} height={40} alt={"User"} />
+          </IconDivider>
+          <Content>
+            <div>{user.firstName}</div>
+            <div>{user.lastName}</div>
+          </Content>
+        </Wrapper>
+      </ContextMenu>
+    </div>
   );
 };

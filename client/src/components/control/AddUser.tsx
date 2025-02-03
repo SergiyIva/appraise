@@ -15,11 +15,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/Dialog";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_USER } from "@/graphql/Mutation";
 import { GET_USER_TREE } from "@/graphql/Query";
 import { Input } from "@/src/components/ui/Input";
 import { User } from "@/gql/graphql";
+
+type Manager = {
+  id: number;
+  name: string;
+  level: number;
+  path: number[];
+};
 
 const getName = () => {
   const sex = faker.person.sex() as SexType;
@@ -27,6 +34,13 @@ const getName = () => {
 };
 
 export const AddUser = () => {
+  const [managers, setManagers] = useState<Manager[]>([]);
+  const [managerId, setManagerId] = useState(
+    managers && managers.length && managers[0].id,
+  );
+  const { data: userTree } = useQuery(GET_USER_TREE, {
+    fetchPolicy: "cache-first",
+  });
   const [mute, { loading, client }] = useMutation(CREATE_USER, {
     onCompleted: (data) => {
       const newUser = data.createUser as User;
@@ -39,13 +53,13 @@ export const AddUser = () => {
         newUser.level = 1;
         newUser.path = [newUser.id];
       }
-      if (!cache?.getUserTree) return;
+      if (!userTree || !userTree.getUserTree) return;
 
       client.writeQuery({
         query: GET_USER_TREE,
         data: {
-          ...cache,
-          getUserTree: [...cache.getUserTree, newUser],
+          ...userTree,
+          getUserTree: [...userTree.getUserTree, newUser],
         },
       });
       updateName();
@@ -53,16 +67,6 @@ export const AddUser = () => {
   });
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const cache = client.cache.readQuery({ query: GET_USER_TREE });
-  const managers = cache?.getUserTree?.map((u) => ({
-    id: u.id,
-    name: `${u.firstName} ${u.lastName}`,
-    level: u.level,
-    path: u.path,
-  }));
-  const [managerId, setManagerId] = useState(
-    managers && managers.length && managers[0].id,
-  );
 
   const updateName = () => {
     const [first, last] = getName();
@@ -84,13 +88,26 @@ export const AddUser = () => {
   };
 
   useEffect(() => {
+    if (userTree && userTree.getUserTree && userTree.getUserTree.length) {
+      const managers = userTree.getUserTree.map((u) => ({
+        id: u.id,
+        name: `${u.firstName} ${u.lastName}`,
+        level: u.level,
+        path: u.path,
+      }));
+      setManagers(managers);
+      setManagerId(managers[0].id);
+    }
+  }, [userTree]);
+
+  useEffect(() => {
     updateName();
   }, []);
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Box position={"fixed"} top={"3"} right={"2"}>
+        <Box position={"fixed"} zIndex={1} top={"3"} right={"2"}>
           <Button onClick={updateName}>Добавить сотрудника</Button>
         </Box>
       </DialogTrigger>

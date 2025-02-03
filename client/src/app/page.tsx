@@ -1,8 +1,10 @@
 import { box } from "@/styled-system/patterns";
 import { AddUser } from "@/src/components/control/AddUser";
 import { Tree } from "@/src/components/tree/Tree";
+import { Suspense } from "react";
 
-export default async function Home() {
+export const dynamic = "force-dynamic";
+export default function Home() {
   return (
     <main
       className={box({
@@ -11,7 +13,9 @@ export default async function Home() {
       })}
     >
       <AddUser />
-      <Tree />
+      <Suspense fallback={<div>Loading</div>}>
+        <Tree />
+      </Suspense>
     </main>
   );
 }

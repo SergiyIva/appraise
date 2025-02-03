@@ -13,8 +13,8 @@ const DialogOverlay = styled(DialogPrimitive.Overlay, {
     backgroundColor: "dark.100",
     opacity: 0.5,
     position: "fixed",
+    zIndex: 1,
     inset: 0,
-    animation: "overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
   },
 });
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
@@ -25,6 +25,7 @@ const Content = styled(DialogPrimitive.Content, {
     borderRadius: "6px",
     boxShadow: "3px 3px 3px 3px hsla(0, 0%, 15%, 0.4)",
     position: "fixed",
+    zIndex: 1,
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -32,6 +33,7 @@ const Content = styled(DialogPrimitive.Content, {
     maxWidth: "500px",
     maxHeight: "85vh",
     padding: "25px",
+
     "&:focus": {
       outline: "none",
     },
@@ -88,7 +90,7 @@ DialogTitle.displayName = DialogPrimitive.Title.displayName;
 const DialogDescription = styled(DialogPrimitive.Description, {
   base: {
     fontSize: "0.9rem",
-    mb: "2",
+    mb: "0.5em",
   },
 });
 DialogDescription.displayName = DialogPrimitive.Description.displayName;

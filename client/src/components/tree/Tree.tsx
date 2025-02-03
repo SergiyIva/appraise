@@ -1,11 +1,11 @@
 "use client";
 
+import { styled } from "@/styled-system/jsx";
 import { useSuspenseQuery } from "@apollo/client";
 import { GET_USER_TREE } from "@/graphql/Query";
-import { Box, styled } from "@/styled-system/jsx";
 import { Nodes } from "@/src/components/tree/components/Nodes";
 
-const Wrapper = styled(Box, {
+const Wrapper = styled("div", {
   base: {
     p: "1rem",
     mt: "5rem",

@@ -15,8 +15,6 @@ export const GET_USER_TREE = graphql(`
   query GetUserTree {
     getUserTree {
       ...TUser
-      #      x @client
-      #      y @client
     }
   }
 `);
