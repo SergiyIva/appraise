@@ -13,28 +13,28 @@ services:
     networks:
       - dokploy-network
 
-  #  client:
-  #    depends_on:
-  #      - server
-  #      - postgres
-  #    hostname: localhost
-  #    restart: always
-  #    build:
-  #      context: .
-  #      dockerfile: ./client/client.Dockerfile
-  #    ports:
-  #      - "3000"
-  #    environment:
-  #      PORT: 3000
-  #    env_file:
-  #      - .env
-  #    networks:
-  #      - dokploy-network
-  #    labels:
-  #      - "traefik.enable=true"
-  #      - "traefik.http.routers.client.rule=Host(`${DOMAIN}`)"
-  #      - "traefik.http.routers.client.entrypoints=websecure"
-  #      - "traefik.http.routers.client.tls.certResolver=letsencrypt"
+  client:
+    depends_on:
+      - server
+      - postgres
+    hostname: localhost
+    restart: always
+    build:
+      context: .
+      dockerfile: ./client/client.Dockerfile
+    ports:
+      - "3000"
+    environment:
+      PORT: 3000
+    env_file:
+      - .env
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.client.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.client.entrypoints=websecure"
+      - "traefik.http.routers.client.tls.certResolver=letsencrypt"
 
   server:
     depends_on:
