@@ -60,3 +60,6 @@ client/.vscode/sftp.json
 data
 
 *.spec.js
+## Panda
+styled-system
+styled-system-studio

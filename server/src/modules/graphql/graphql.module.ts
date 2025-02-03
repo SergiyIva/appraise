@@ -31,7 +31,6 @@ import { UserModule } from "@modules/user/user.module";
             ? [ApolloServerPluginLandingPageLocalDefault()]
             : [],
         path: "/graphql",
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         validationRules: [depthLimit(10)],
         context: ({ req, res }: { req: Request; res: Response }) => ({
           req,

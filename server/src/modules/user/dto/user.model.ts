@@ -1,17 +1,17 @@
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
 export class User {
-  @Field()
+  @Field(() => Int)
   id: number;
   @Field()
   firstName: string;
   @Field()
   lastName: string;
-  @Field()
+  @Field(() => Int)
   level: number;
-  @Field(() => Number, { nullable: true })
+  @Field(() => Int, { nullable: true })
   managerId: number;
-  @Field(() => [Number])
+  @Field(() => [Int])
   path: number[];
 }

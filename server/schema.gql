@@ -3,9 +3,9 @@
 # ------------------------------------------------------
 
 type Mutation {
-  changeManager(managerId: Float!, userId: Float!): [User!]!
-  createUser(firstName: String!, lastName: String!, managerId: Float!): User!
-  removeUser(id: Float!): [User!]!
+  changeManager(managerId: Int!, userId: Int!): [User!]!
+  createUser(firstName: String!, lastName: String!, managerId: Int!): User!
+  removeUser(id: Int!): [User!]!
 }
 
 type Query {
@@ -14,9 +14,9 @@ type Query {
 
 type User {
   firstName: String!
-  id: Float!
+  id: Int!
   lastName: String!
-  level: Float!
-  managerId: Float
-  path: [Float!]!
+  level: Int!
+  managerId: Int
+  path: [Int!]!
 }
