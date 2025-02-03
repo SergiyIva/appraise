@@ -17,7 +17,7 @@ function makeClient() {
   const httpLink = new HttpLink({
     uri,
     fetchOptions: {
-      cache: "no-cache",
+      cache: "no-store",
     },
   });
 
