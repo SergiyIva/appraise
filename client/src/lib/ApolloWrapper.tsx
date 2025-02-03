@@ -16,6 +16,7 @@ function makeClient() {
       : process.env.NEXT_PUBLIC_DOMAIN_API) + "/graphql";
   const httpLink = new HttpLink({
     uri,
+    fetchOptions: { cache: "no-store" },
   });
 
   return new ApolloClient({
