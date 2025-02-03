@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "AppRaise",
   description: "Your organization structure",
 };
-
+export const dynamic = "force-dynamic";
 export default function RootLayout({
   children,
 }: Readonly<{
