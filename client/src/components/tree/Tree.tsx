@@ -24,7 +24,9 @@ const Container = styled("div", {
 });
 
 export const Tree = () => {
-  const { data } = useSuspenseQuery(GET_USER_TREE);
+  const { data } = useSuspenseQuery(GET_USER_TREE, {
+    fetchPolicy: "network-only",
+  });
   return (
     <Wrapper>
       {data.getUserTree ? (

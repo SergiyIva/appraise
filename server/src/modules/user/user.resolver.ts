@@ -8,6 +8,7 @@ export class UserResolver {
 
   @Query(() => [User], { nullable: true })
   async getUserTree() {
+    console.log("GetUserTree");
     return this.userService.getTree();
   }
 

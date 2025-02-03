@@ -4,7 +4,8 @@ import { Tree } from "@/src/components/tree/Tree";
 import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
-export default function Home() {
+
+export default async function Home() {
   return (
     <main
       className={box({
