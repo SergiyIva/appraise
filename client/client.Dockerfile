@@ -51,6 +51,7 @@ COPY --from=builder /app/client/styled-system ./styled-system
 COPY --from=builder /app/client/node_modules ./node_modules
 COPY --from=builder /app/client/package.json ./package.json
 COPY --from=builder /app/client/next.config.ts ./next.config.ts
+COPY --from=builder /app/client/panda.config.ts ./panda.config.ts
 
 USER nextjs
 
